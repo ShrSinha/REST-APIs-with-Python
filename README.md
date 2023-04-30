@@ -34,9 +34,10 @@ Following actions and corresponding endpoints are available via the API -
 
 Application includes -
 - Docker deployment
-- Exception handling
+- Marshmellow for data quality
+- Documenting error and error handling 
 - Logging
 
 Application ToDos :
 - Fully automate the API lifecycle for CI/CD integrations.
-- 
+- User authentication with Flask-JWT-Extended
