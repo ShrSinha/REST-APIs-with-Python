@@ -73,14 +73,17 @@ def create_item():
             "Missing required field from store_id, name and price.")
         abort(HTTPStatus.BAD_REQUEST,
               message="Missing required field from store_id, name and price.")
+        
     if request_item["store_id"] not in stores:
         app.logger.error(f"Store not found.")
         abort(HTTPStatus.NOT_FOUND, message="Store not found.")
+
     if not isinstance(request_item["price"], (int, float)) or request_item["price"] < 0:
         app.logger.error("Price must be a positive number.")
         abort(HTTPStatus.BAD_REQUEST, message="Price must be a positive number.")
-    item_id = uuid.uuid4.hex()
-    items[item_id] = {**request_item}
+
+    item_id = uuid.uuid4().hex
+    items[item_id] = {**request_item, "id": item_id}
     store_name = stores[request_item["store_id"]]["name"]
     app.logger.debug(
         f"Item '{items[item_id]}' created for store '{store_name}'")
