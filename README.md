@@ -32,12 +32,13 @@ Following actions and corresponding endpoints are available via the API -
 
 ## Production Quality
 
-Application includes -
-- Docker deployment
-- Marshmellow for data quality
-- Documenting error and error handling 
-- Logging
+Application has -
+- Flask-Smorest web development framework.
+- Flask-Migrate to keep model and table definitions in sync.
+- Docker deployment.
+- OpenAPI documentation.
+- Data Quality checks with Marshmellow. 
 
-Application ToDos :
+Application ToDos -
 - Fully automate the API lifecycle for CI/CD integrations.
 - User authentication with Flask-JWT-Extended

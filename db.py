@@ -2,7 +2,7 @@
 stores = {
     "123": {
             "name": "My Store",
-            "id": "jbhjksd#"
+            "id": "123"
           }
 }
 
