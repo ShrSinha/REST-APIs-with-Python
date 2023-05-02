@@ -37,8 +37,8 @@ Application has -
 - Flask-Migrate to keep model and table definitions in sync.
 - Docker deployment.
 - OpenAPI documentation.
-- Data Quality checks with Marshmellow. 
+- Data Quality checks for requests and responses with Marshmallow. 
 
 Application ToDos -
 - Fully automate the API lifecycle for CI/CD integrations.
-- User authentication with Flask-JWT-Extended
+- User authentication with Flask-JWT-Extendeds.
