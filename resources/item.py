@@ -2,10 +2,10 @@ from flask import request, jsonify
 from flask.views import MethodView
 from flask_smorest import abort, Blueprint
 from http import HTTPStatus
-from db import items
-import uuid
+from db import db
+from models import ItemModel
 from schemas import ItemSchema, ItemUpdateSchema
-
+from sqlalchemy.exc import SQLAlchemyError
 
 
 blp = Blueprint("items", __name__, description="Operations on items")
@@ -53,17 +53,19 @@ class ItemList(MethodView):
     # Body: {"store_id": "123", name": "Chair", "price": 175.50}
     @blp.arguments(ItemSchema)
     def post(self, request_item):
-        # if request_item["store_id"] not in stores:
-        #     app.logger.error(f"Store not found.")
-        #     abort(HTTPStatus.NOT_FOUND, message="Store not found.")
+        # if request_item["price"] < 0:
+        #     abort(HTTPStatus.BAD_REQUEST,
+        #           message="Price must be a positive number.")
+        # request_item is a dict
+        item = ItemModel(**request_item)
 
-        if request_item["price"] < 0:
-            abort(HTTPStatus.BAD_REQUEST,
-                  message="Price must be a positive number.")
+        try:
+            db.session.add(item)
+            db.session.commit()
+        except SQLAlchemyError:
+            abort(500, message="An error occurred while inserting the item.")
 
-        item_id = uuid.uuid4().hex
-        items[item_id] = {**request_item, "id": item_id}
-        return jsonify(items[item_id]), HTTPStatus.CREATED
+        return item
 
     # Retrieve all items
     def get(self):

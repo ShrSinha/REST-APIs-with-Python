@@ -34,6 +34,7 @@ Following actions and corresponding endpoints are available via the API -
 
 Application has -
 - Flask-Smorest web development framework.
+- SQLAlchemy ORM library with SQLite relational database. Flask-SQLAlchemy extension to connect SQLAlchemy to Flask apps.
 - Flask-Migrate to keep model and table definitions in sync.
 - Docker deployment.
 - OpenAPI documentation.
@@ -42,3 +43,4 @@ Application has -
 Application ToDos -
 - Fully automate the API lifecycle for CI/CD integrations.
 - User authentication with Flask-JWT-Extendeds.
+

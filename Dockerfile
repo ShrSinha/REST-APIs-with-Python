@@ -1,5 +1,3 @@
-# To run api in docker with automatic reloading
-# docker run -dp 5005:5000 -w /app -v "$(pwd):/app" rest-apis-with-flask-python
 FROM python:3.11
 EXPOSE 5000
 WORKDIR /app

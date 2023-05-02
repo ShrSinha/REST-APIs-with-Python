@@ -1,22 +1,3 @@
-# TODO - No linking between stores and items
-stores = {
-    "123": {
-            "name": "My Store",
-            "id": "123"
-          }
-}
+from flask_sqlalchemy import SQLAlchemy
 
-items = {
-    "1": {
-            "name": "Chair", 
-            "price": 10.99,
-            "store_id": "123",
-            "id": "1"
-        },
-    "2": {
-            "name": "Table", 
-            "price": 20.99,
-            "store_id": "123",
-            "id": "2"
-        }
-}
+db = SQLAlchemy()
