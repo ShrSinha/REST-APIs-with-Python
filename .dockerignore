@@ -10,3 +10,4 @@ pip-log.txt
 .git
 .mypy_cache
 .pytest_cache
+OpenAPI*
