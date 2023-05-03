@@ -11,3 +11,4 @@ pip-log.txt
 .mypy_cache
 .pytest_cache
 OpenAPI*
+store.log

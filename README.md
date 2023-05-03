@@ -13,11 +13,13 @@ Application has -
 - OpenAPI documentation.
 - Data Quality checks for requests and responses with Marshmallow. 
 - API testing using Insomnia.
+- System testing for Store endpoints.
 
 Application ToDos -
 - User authentication with Flask-JWT-Extendeds.
 - Implement a many:many relationship in SQLAlchemy ORM.
-- Automated testing
+- System testing for Item endpoints.
+- Automated testing.
 
 
 ## API Documentation

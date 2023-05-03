@@ -1,3 +1,4 @@
+import logging
 from flask import request
 from flask.views import MethodView
 from flask_smorest import abort, Blueprint
@@ -10,12 +11,18 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 blp = Blueprint("items", __name__, description="Operations on items")
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+file_handler = logging.FileHandler("store.log")
+file_handler.setLevel(logging.DEBUG)
+logger.addHandler(file_handler)
 
 @blp.route("/item/<string:item_id>")
 class Item(MethodView):
     # Retrieve a particular item
     @blp.response(HTTPStatus.OK, ItemSchema)
     def get(self, item_id):
+        logger.info(f"Get item: {item_id}.")
         item = ItemModel.query.get_or_404(item_id)
         return item
 
@@ -24,6 +31,7 @@ class Item(MethodView):
     @blp.arguments(ItemUpdateSchema)
     @blp.response(HTTPStatus.CREATED, ItemSchema)
     def put(self, request_item, item_id):
+        logger.info(f"Update item: {item_id}.")
         item = ItemModel.query.get(item_id)
 
         if item:
@@ -39,6 +47,7 @@ class Item(MethodView):
 
     # Delete an item
     def delete(self, item_id):
+        logger.info(f"Delete item: {item_id}.")
         item = ItemModel.query.get_or_404(item_id)
         db.session.delete(item)
         db.session.commit()
@@ -52,10 +61,7 @@ class ItemList(MethodView):
     @blp.arguments(ItemSchema)
     @blp.response(HTTPStatus.CREATED, ItemSchema)
     def post(self, request_item):
-        # if request_item["price"] < 0:
-        #     abort(HTTPStatus.BAD_REQUEST,
-        #           message="Price must be a positive number.")
-        # request_item is a dict
+        logger.info(f"Create item: {request_item}.")
         item = ItemModel(**request_item)
 
         try:
@@ -75,4 +81,5 @@ class ItemList(MethodView):
     # Retrieve all items
     @blp.response(200, ItemSchema(many=True))
     def get(self):
+        logger.info(f"Get all items.")
         return ItemModel.query.all()

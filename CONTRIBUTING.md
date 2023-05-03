@@ -6,6 +6,11 @@ source /Users/shrutisinha/REST-APIs-with-Python/.venv/bin/activate
 pip install -r requirements.txt
 deactivate
 ```
+- Running Tests
+```python
+python3 -m unittest tests.test_base
+python3 -m unittest tests.system.test_store
+```
 - To initialize database migration with Flask-Migrate
 ```python
 flask db init

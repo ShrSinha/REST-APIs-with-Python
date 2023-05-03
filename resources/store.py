@@ -1,3 +1,4 @@
+import logging
 from flask import request, jsonify
 from flask.views import MethodView
 from flask_smorest import abort, Blueprint
@@ -11,22 +12,28 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 blp = Blueprint("stores", __name__, description="Operations on stores")
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+file_handler = logging.FileHandler("store.log")
+file_handler.setLevel(logging.DEBUG)
+logger.addHandler(file_handler)
 
 @blp.route("/store/<string:store_id>")
 class Store(MethodView):
     # Get a store
     @blp.response(HTTPStatus.OK, StoreSchema)
     def get(self, store_id):
+        logger.info(f"Get store: {store_id}.")
         store = StoreModel.query.get_or_404(store_id)
         return store
 
     # Delete a store
     def delete(self, store_id):
+        logger.info(f"Delete store: {store_id}.")
         store = StoreModel.query.get_or_404(store_id)
         db.session.delete(store)
         db.session.commit()
-        return{"message": "Store deleted."}
-
+        return {"message": "Store deleted."}
 
 
 @blp.route("/store")
@@ -36,10 +43,7 @@ class StoreList(MethodView):
     @blp.arguments(StoreSchema)
     @blp.response(HTTPStatus.CREATED, StoreSchema)
     def post(self, request_store):
-        # if len(request_store["name"]) == 0:
-        #     abort(HTTPStatus.BAD_REQUEST,
-        #           message="Store name must be a non-empty string.")
-
+        logger.info(f"Create store: {request_store}.")
         store = StoreModel(**request_store)
 
         try:
@@ -59,4 +63,5 @@ class StoreList(MethodView):
     # Get all stores
     @blp.response(200, StoreSchema(many=True))
     def get(self):
+        logger.info(f"Get all stores.")
         return StoreModel.query.all()

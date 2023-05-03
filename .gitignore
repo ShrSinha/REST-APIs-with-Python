@@ -5,4 +5,4 @@ data.db
 *.pyc
 .DS_Store
 refresher.py
-store_api.log
+store.log
