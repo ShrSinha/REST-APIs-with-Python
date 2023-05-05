@@ -3,7 +3,18 @@
 **Store REST API** using Flask (with extensions Flask-Smorest, Flask-JWT-Extended, and Flask-SQLAlchemy ) and Docker. 
 
 
-## About the application 
+## API Documentation
+
+Here is the [OpenAPI Documentation of the Store REST API](OpenAPI.json)
+
+Few example OpenAPI endpoints documentation images from `http://localhost:5005/swagger-ui` :-
+
+[Endponints of the Store REST API](OpenAPIEndpoints.png)
+
+[Schema of the Store REST API](OpenAPISchema.png)
+
+
+## Tech Stack 
 
 Application has -
 - Flask-Smorest web development framework.
@@ -20,18 +31,3 @@ Application ToDos -
 - Implement a many:many relationship in SQLAlchemy ORM.
 - System testing for Item endpoints.
 - Automated testing.
-
-
-## API Documentation
-
-[Complete OpenAPI Documentation of the Store REST API](OpenAPI.json)
-
-OpenAPI endpoints documentation images from `http://localhost:5005/swagger-ui` :-
-
-[Endponints of the Store REST API](OpenAPIEndpoints.png)
-
-[Schema of the Store REST API](OpenAPISchema.png)
-
-
-
-
